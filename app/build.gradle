@@ -6,7 +6,7 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        applicationId "com.taimar198.weatherongooglemap"
+        applicationId "com.company.weathervietnamongooglemap"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 1

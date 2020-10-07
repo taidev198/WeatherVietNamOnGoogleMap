@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.taimar198.weatherongooglemap">
+    package="com.company.weathervietnamongooglemap">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -17,7 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <receiver android:name=".ui.appwidget.WeatherAppWidget">
+        <receiver android:name="com.company.weathervietnamongooglemap.ui.appwidget.WeatherAppWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <action android:name="com.taimar198.weatherongooglemap.ui.appwidget.TEXT_CHANGED" />
@@ -27,15 +27,15 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/weather_app_widget_info" />
         </receiver>
-        <service android:name=".ui.appwidget.GPSWidgetService" />
+        <service android:name="com.company.weathervietnamongooglemap.ui.appwidget.GPSWidgetService" />
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBTcsNmbllmjlhi_7LQUEyXPPLE3CbZ2vw" />
+            android:value="AIzaSyDJVF3pDkb_JkWk5iXSNq2XQqxYO9Ow5NM" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name="com.company.weathervietnamongooglemap.ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.SEARCH" />
