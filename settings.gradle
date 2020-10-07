@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name = "Weather on GoogleMap"
+rootProject.name = "Weather VietNam On GoogleMap"
