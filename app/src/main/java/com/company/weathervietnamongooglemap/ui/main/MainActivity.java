@@ -93,10 +93,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         AdapterView.OnItemSelectedListener,
         Methods.OnGetWeatherInfoFromAddress,
         Methods.OnGetWeatherInfo,
-        ClusterManager.OnClusterClickListener<WeatherForecastResponse>,
-        ClusterManager.OnClusterInfoWindowClickListener<WeatherForecastResponse>,
-        ClusterManager.OnClusterItemClickListener<WeatherForecastResponse>,
-        ClusterManager.OnClusterItemInfoWindowClickListener<WeatherForecastResponse>,
         GoogleMap.OnInfoWindowClickListener,
         Methods.OnDownloadImage,
         View.OnClickListener,
@@ -178,54 +174,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     }
 
-    private void initCluster() {
-        mClusterManager = new ClusterManager<>(this, mMap);
-        mClusterManager.setRenderer(new WeatherRenderer(this, mMap, mClusterManager));
-        mMap.setOnCameraIdleListener(mClusterManager);
-        mMap.setOnMarkerClickListener(mClusterManager);
-        mMap.setOnInfoWindowClickListener(mClusterManager);
-
-        mClusterManager.setOnClusterClickListener(this);
-        mClusterManager.setOnClusterInfoWindowClickListener(this);
-        mClusterManager.setOnClusterItemClickListener(this);
-        mClusterManager.setOnClusterItemInfoWindowClickListener(this);
-    }
-
     private void initAutocomplete() {
-        Places.initialize(getApplicationContext(), BuildConfig.CONSUMER_GMAP_KEY);
-        // Create a new Places client instance.
-        placesClient = Places.createClient(this);
-        // Initialize the AutocompleteSupportFragment.
-        AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
-                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
 
-        // Specify the types of place data to return.
-//        autocompleteFragment.setTypeFilter(TypeFilter.CITIES);
-        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.ID,
-                Place.Field.NAME,
-                Place.Field.LAT_LNG,
-                Place.Field.ADDRESS));
-        // Set up a PlaceSelectionListener to handle the response.
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-
-            @Override
-            public void onPlaceSelected(@NonNull Place place) {
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                        new LatLng(place.getLatLng().latitude,
-                                place.getLatLng().longitude), DEFAULT_ZOOM));
-                mMap.addMarker(new MarkerOptions().position(new LatLng(place.getLatLng().latitude,
-                        place.getLatLng().longitude)).
-                        title(place.getAddress()));
-                System.out.println(place.getAddress());
-                Methods.fetchingWeatherForecast(mWeatherApi, Double.toString(place.getLatLng().latitude),
-                        Double.toString(place.getLatLng().longitude), place.getAddress(),"", mWeatherListener);
-            }
-
-            @Override
-            public void onError(@NonNull Status status) {
-
-            }
-        });
     }
 
     private void setUpMap() {
@@ -306,8 +256,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         updateLocationUI();
         // Get the current location of the device and set the position of the map.
         getDeviceLocation();
-//        TileOverlay tileOverlay = mMap.addTileOverlay(new TileOverlayOptions()
-//                .tileProvider(tileProvider));
 //
     }
 
@@ -438,48 +386,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.addMarker(new MarkerOptions().position(latLng));
     }
 
-    @Override
-    public boolean onClusterClick(Cluster<WeatherForecastResponse> cluster) {
-        mClusterManager.getMarkerCollection().showAll();
-        return false;
-    }
-
-    @Override
-    public void onClusterInfoWindowClick(Cluster<WeatherForecastResponse> cluster) {
-        mClusterManager.getMarkerCollection().showAll();
-    }
-
-    @Override
-    public boolean onClusterItemClick(WeatherForecastResponse item) {
-        mClusterManager.getMarkerCollection().showAll();
-        return false;
-    }
-
-    @Override
-    public void onClusterItemInfoWindowClick(WeatherForecastResponse item) {
-
-        mClusterManager.getMarkerCollection().showAll();
-    }
 
 /***https://stackoverflow.com/questions/25968486/how-to-add-info-window-for-clustering-marker-in-android
  * https://stackoverflow.com/questions/21885225/showing-custom-infowindow-for-android-maps-utility-library-for-android/21964693#21964693*/
     @Override
     public void OnGetWeatherInfoSuccess(WeatherForecastResponse weatherForecastResponse) {
-//        initCluster();
-//        mClusterManager.getMarkerCollection()
-//                .setInfoWindowAdapter(new CustomWindowAdapter(getLayoutInflater(), weatherForecastResponse));
-//        mMap.setInfoWindowAdapter(mClusterManager.getMarkerManager());
-//        mClusterManager.addItem(weatherForecastResponse);
-//        mClusterManager.getMarkerCollection().showAll();
-//        mClusterManager.cluster();
-
         Marker marker = mMap.addMarker(new MarkerOptions()
                 .icon(BitmapDescriptorFactory.fromResource(Methods.getDrawable(weatherForecastResponse.getCurrentWeather().getWeathers().get(0).getIcon(), this)))
                 .position(weatherForecastResponse.getPosition())
         .snippet(weatherForecastResponse.getCurrentWeather().getWeathers().get(0).getDescription())
         .title(weatherForecastResponse.getAddress()));
-//        mMap.setInfoWindowAdapter(new CustomWindowAdapter(getLayoutInflater(), weatherForecastResponse));
-//        mMap.setOnInfoWindowClickListener(this);
         marker.showInfoWindow();
     }
 
@@ -513,8 +429,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void OnDownloadImageSuccess(LatLng latLng, Bitmap bitmap) {
-
-//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, DEFAULT_ZOOM));
         if (mRadar.size() == 0) {
             mRadar.put(bitmap, latLng);
         }
