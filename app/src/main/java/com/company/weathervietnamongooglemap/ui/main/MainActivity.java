@@ -71,22 +71,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
-
-/**https://guides.codepath.com/android/Google-Maps-API-v2-Usage
- * https://stackoverflow.com/questions/15636303/extract-coordinates-from-kml-file-in-java
- * https://stackoverflow.com/questions/42516114/geoxml3-accessing-kml-attribute-datas
- * https://stackoverflow.com/questions/46346531/parsing-kml-in-java
- * https://stackoverflow.com/questions/1140144/read-and-parse-kml-in-java
- * https://developers.google.com/maps/documentation/geocoding/overview
- * https://stackoverflow.com/questions/3109158/how-to-draw-a-path-on-a-map-using-kml-file
- * https://www.tutlane.com/tutorial/android/android-xml-parsing-using-sax-parser
- * https://github.com/openstreetmap/splitter/blob/master/src/uk/me/parabola/splitter/kml/KmlParser.java
- * tutlane.com/tutorial/android/android-xml-parsing-using-sax-parser
- * //spinner
- * https://mkyong.com/android/android-spinner-drop-down-list-example/
- * //get current location
- * https://www.google.com/search?q=reading+coordinates+in+kml+file+with+jsoup&oq=reading+coordinates+in+kml+file+with+jsoup&aqs=chrome..69i57.19692j0j4&sourceid=chrome&ie=UTF-8
- * */
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback,
         ParserCoorFromKML.OnParsingData,
@@ -169,13 +153,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        //init autocomplete
-        initAutocomplete();
-
-    }
-
-    private void initAutocomplete() {
-
     }
 
     private void setUpMap() {
@@ -238,16 +215,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     *
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -311,7 +278,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 Methods.fetchingWeatherForecast(mWeatherApi, Double.toString(lastKnownLocation.getLatitude()),
                                         Double.toString(lastKnownLocation.getLongitude()), address, "", mWeatherListener);
                                 Intent intent = new Intent(WeatherAppWidget.ACTION_TEXT_CHANGED);
-                                intent.putExtra("NewString", "tai");
+                                intent.putExtra("NewString", "test");
                                 getApplicationContext().sendBroadcast(intent);
                             }
                         } catch (IOException e) {
@@ -382,13 +349,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
-    private void addMarkerToMap(LatLng latLng){
-        mMap.addMarker(new MarkerOptions().position(latLng));
-    }
 
-
-/***https://stackoverflow.com/questions/25968486/how-to-add-info-window-for-clustering-marker-in-android
- * https://stackoverflow.com/questions/21885225/showing-custom-infowindow-for-android-maps-utility-library-for-android/21964693#21964693*/
     @Override
     public void OnGetWeatherInfoSuccess(WeatherForecastResponse weatherForecastResponse) {
         Marker marker = mMap.addMarker(new MarkerOptions()

@@ -19,12 +19,11 @@ import com.company.weathervietnamongooglemap.R;
 import com.company.weathervietnamongooglemap.data.api.WeatherApi;
 import com.company.weathervietnamongooglemap.data.api.response.WeatherForecastResponse;
 import com.company.weathervietnamongooglemap.data.api.response.WeatherResponse;
-import com.company.weathervietnamongooglemap.ui.base.OnGetData;
+import com.company.weathervietnamongooglemap.data.OnGetData;
 import com.company.weathervietnamongooglemap.utls.Methods;
 
 import java.util.List;
-/**https://stackoverflow.com/questions/33867088/request-location-permissions-from-a-service-android-m
- * https://www.edumobile.org/android/gps-app-widget-example-in-android-programming/*/
+
 public class GPSWidgetService extends Service implements OnGetData<WeatherForecastResponse> {
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private OnGetData<WeatherForecastResponse> mListener;

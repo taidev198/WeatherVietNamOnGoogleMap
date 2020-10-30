@@ -26,7 +26,7 @@ import com.company.weathervietnamongooglemap.data.api.response.WeatherForecastRe
 import com.company.weathervietnamongooglemap.data.model.PlaceMark;
 import com.company.weathervietnamongooglemap.data.model.PlaceMarkList;
 import com.company.weathervietnamongooglemap.ui.appwidget.WeatherAppWidget;
-import com.company.weathervietnamongooglemap.ui.base.OnGetData;
+import com.company.weathervietnamongooglemap.data.OnGetData;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

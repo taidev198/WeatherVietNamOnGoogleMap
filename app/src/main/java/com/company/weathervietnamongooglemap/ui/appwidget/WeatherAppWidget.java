@@ -23,7 +23,7 @@ import java.net.InetAddress;
 public class WeatherAppWidget extends AppWidgetProvider {
 
     public static String UPDATE_ACTION = "ActionUpdateWeatherWidget";
-    public static final String ACTION_TEXT_CHANGED = "com.taimar198.weatherongooglemap.ui.appwidget.TEXT_CHANGED";
+    public static final String ACTION_TEXT_CHANGED = "com.company.weathervietnamongooglemap.ui.appwidget.TEXT_CHANGED";
 
     /**https://stackoverflow.com/questions/21866086/how-to-open-application-by-clicking-widget*/
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
