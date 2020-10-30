@@ -157,7 +157,7 @@ public class Methods {
     }
 
     public static PlaceMarkList getPlaceMarkList(Context context) {
-        InputStream in_s = context.getResources().openRawResource(R.raw.diaphanhuyen);
+        InputStream in_s = context.getResources().openRawResource(R.raw.huyen);
         PlaceMarkList placeMarkList = new PlaceMarkList();
         List<PlaceMark> mPlaceMarkList = new ArrayList<>();
         Map<String, Map<String, List<LatLng>>> mLocation = new LinkedHashMap<>();
